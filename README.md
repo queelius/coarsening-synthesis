@@ -105,6 +105,8 @@ review piece). Shortlist and rationale in `.papermill/state.md`.
 
 ## Status
 
+**Reviewed 2026-06-08 (papermill multi-agent): minor-revision.** No critical issues; the math was independently re-derived and the multiple-instance-learning fold-in (cor:mil) verified sound. The review's main items were addressed the same day: cor:mil restated as a true regime-(A) score corollary (carrying the noisy-OR link weight), the cor:dp corollary count corrected, and the Dietterich (1997) MUSK anchor added.
+
 **Scaffold v0.1 (June 2026).** All seven sections have substantive
 content. The general consistency theorem has a complete proof for regime
 (A) and a proof-with-one-open-step for regime (B); the rank and
