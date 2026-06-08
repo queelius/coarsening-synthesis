@@ -216,17 +216,21 @@ Take regime (A) with the bag-level Bernoulli report law under the
 logical-OR aggregation rule, fitted bag-positive probability $\hat p_i =
 1 - \exp(-\bm m_i^\top \hat{\bm s})$ for the bag-by-instance-type
 composition row $\bm m_i$ and instance-type positivity parameter
-$\bm s$, and $\T(Y) = Y$ the bag label. Then
-\eqref{eq:general-consistency} reads $M^\top D^{-1}(\bm Y - \hat{\bm p})
-= \bm 0$, with $M$ the composition matrix and $D =
-\operatorname{diag}(\hat{\bm p})$: along every direction in the column
-space of $M$ the fitted and observed bag-positive counts coincide. This
-is the bag-prevalence consistency theorem of
+$\bm s$, and $\T(Y) = Y$ the bag label. The regime-(A) stationarity
+condition is the chain-ruled score $(\partial\eta/\partial\bm s)^\top(\bm
+Y - \hat{\bm p}) = \bm 0$ from the proof of \cref{thm:general-consistency};
+here the link Jacobian is $\partial\eta/\partial\bm s = D^{-1}M$, so it
+reads $M^\top D^{-1}(\bm Y - \hat{\bm p}) = \bm 0$, with $M$ the
+composition matrix and $D = \operatorname{diag}(\hat{\bm p})$: along every
+direction in the column space of $M$ the fitted and observed bag-positive
+counts coincide. This is the bag-prevalence consistency theorem of
 \citet{towell2026milcoarsening}. The bag label is Bernoulli, a regular
-exponential family, so the reduction is exact; the inverse-fitted-rate
-weighting $D^{-1}$ is the only wrinkle, the variance-link factor of the
-log-survival (noisy-OR) link, which is not the Bernoulli canonical link,
-so the moment matching is IRLS-weighted rather than unweighted. As in
+exponential family, so the reduction is exact. The factor $D^{-1}$ is the
+Jacobian of the non-canonical log-survival (noisy-OR) link: at the
+canonical link $\partial\eta/\partial\bm s$ would be $M$ and the identity
+would collapse to the unweighted $m(\hat\theta) = \bar\T$ of
+\eqref{eq:general-consistency}, but the noisy-OR link carries the
+inverse-fitted-rate weight, so the moment matching is IRLS-weighted. As in
 spatial transcriptomics, the \emph{vector} statement over instance types
 additionally requires the joint rank condition of \cref{thm:general-rank},
 here full column rank of $M$, and the moral is the sibling's: bag-level
@@ -273,7 +277,7 @@ which would require the Gaussian kernel. This is the second seam: the
 release law is a continuous convolution, not a curved exponential family
 in $\theta$, so release consistency is recovered from the location-family
 branch (B) and its proof uses the location-family score identity, not the
-exponential-family mean-value identity that serves the other four
+exponential-family mean-value identity that serves the other five
 corollaries. With this reading the differential-privacy identity is an
 instance of the same stationarity principle, but it is not a corollary
 of regime (A).

@@ -263,6 +263,28 @@ build_status:
 stage_timeline:
   - date: 2026-06-03
     event: "Scaffold v0.1: repo created mirroring dp-coarsening LaTeX setup; seven sections written; refs.bib with six sibling Zenodo DOIs + CAR lineage + domain anchors; build verified (13 pp, 0 undefined). Papermill init+thesis+outline+venue+status recorded."
+
+# ============================================================================
+# REVIEW HISTORY (papermill multi-agent editorial passes; append-only)
+# ============================================================================
+
+review_history:
+  - date: 2026-06-03
+    dir: ".papermill/reviews/2026-06-03"
+    note: "Initial multi-agent review pass."
+  - date: 2026-06-03
+    dir: ".papermill/reviews/2026-06-03-rereview"
+    note: "Re-review pass."
+  - date: 2026-06-04
+    dir: ".papermill/reviews/2026-06-04"
+    note: "Multi-agent review pass."
+  - date: 2026-06-08
+    dir: ".papermill/reviews/2026-06-08"
+    recommendation: minor-revision
+    focus: "Post-MIL-fold-in integrity (cor:mil math, seven-domains/six-corollaries counts, regime-A classification)."
+    findings: "Critical 0, Major 3, Minor 7, Suggestions 4."
+    top_item: "cor:mil is classified as a clean regime-(A) exact reduction, but its identity M^T D^{-1}(Y - p_hat) = 0 is IRLS-weighted under a non-canonical noisy-OR link, not the unweighted m(theta_hat) = bar T the general theorem states; re-state regime (A) in score-equation form (collapsing to m=bar T for canonical links) so cor:mil is a true corollary, and mark the MIL row of tab:reduction as exact-but-weighted."
+    other_major: "Stale count at consistency.tex:276 (the other four corollaries should be five; intro and discussion already say five). MUSK1/MUSK2 named in applications.tex with no citation to Dietterich et al. (1997); MIL is the only domain lacking an external anchor (sibling is URL-only). Build verified clean at 12 pages."
 ---
 
 # State: coarsening-synthesis
@@ -512,3 +534,31 @@ is to elevate Statistics Surveys to backup 1 (near-certain genre fit, same
 template, same preprint policy) as the safety net if STS bounces on genre, and
 to drop JMLR and Annual Review of Statistics from the viable-direct-submission
 list for the reasons above.
+
+# Review log: 2026-06-08 (multi-agent editorial pass)
+
+Recommendation: **minor-revision**. Build verified clean: `make paper` exit 0,
+12 pages, 0 substantive undefined refs, 0 undefined citations, 0 BibTeX
+warnings, no em-dashes. (The Dashboard/build_status above are the point-in-time
+scaffold-v0.1 snapshot and say 13 pages; current build is 12. Snapshots left
+intact per the append-only convention.)
+
+Focus of this pass was the just-folded-in sixth corollary (cor:mil, multiple
+instance learning) and the seven-domains/six-corollaries accounting.
+
+Findings: Critical 0, Major 3, Minor 7, Suggestions 4. Full report and
+per-specialist files in `.papermill/reviews/2026-06-08/` (review.md plus
+logic-checker, methodology-auditor, novelty-assessor, prose-auditor,
+citation-verifier, format-validator, literature-context).
+
+Single most-important remaining item: cor:mil is presented as a clean
+regime-(A) exact reduction, but the identity it derives, M^T D^{-1}(Y - p_hat)
+= 0, is IRLS-weighted under the non-canonical noisy-OR link, not the unweighted
+m(theta_hat) = bar T that thm:general-consistency states; re-state regime (A)
+in score-equation form so it collapses to m=bar T for canonical-link members
+(scrna, phenotype, spatial-Poisson) and carries the D^{-1} weight for MIL,
+making cor:mil a true corollary, and mark the MIL row of tab:reduction as
+exact-but-IRLS-weighted. Other majors: fix the stale count
+'the other four corollaries' -> 'five' at consistency.tex:276 (intro and
+discussion already say five); cite Dietterich et al. (1997) where MUSK1/MUSK2
+is named.
