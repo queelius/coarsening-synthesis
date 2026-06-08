@@ -89,3 +89,21 @@ Hui--Walter latent-class model \citep{hui1980estimating}. The sibling
 \citep{towell2026phenotypecoarsening} develops the glass ceiling, the
 identifiability-with-chart-review theorem, and the informative-coding
 bias bound.
+
+\subsection{Multiple instance learning: bag labels as coarsening}
+
+The latent $\Y$ is the vector of instance-level positivities; the report
+is the bag label, positive under the logical-OR rule when at least one
+instance in the bag is positive, so the bag is the candidate set; the
+coarsening-sufficient statistic is the bag label $Y_b$; the singleton is
+a singleton bag, a bag carrying an instance-level label. Bag-prevalence
+consistency (\cref{cor:mil}) is the regime-(A) identity for the
+bag-level Bernoulli model under the log-survival (noisy-OR) link, and the
+rank condition specializes to full column rank of the
+bag-by-instance-type composition matrix $M$. The sibling
+\citep{towell2026milcoarsening} works out the rank condition, the
+IRLS-weighted bag-prevalence identity, a first-order bias bound under
+aggregation-rule misspecification, and a MUSK1/MUSK2 application; it
+identifies the confound between intrinsic instance positivity and the
+noisy-OR firing rate as the discrete-label analogue of the spike-in
+capture-efficiency gap in scRNA-seq.

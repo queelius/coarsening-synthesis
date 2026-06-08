@@ -14,7 +14,7 @@ vocabularies, but the statistical object is the same: inference for a
 latent parameter from data that have been coarsened by a mechanism the
 analyst may or may not control.
 
-\subsection{One idea, six fields}
+\subsection{One idea, seven fields}
 
 The masked-data likelihood framework of \citet{towell2026masked} gives
 the common skeleton. A latent cause is observed as a candidate set;
@@ -24,13 +24,14 @@ say when the coarsening mechanism factors out of the likelihood, so
 the analyst may maximize a face-value likelihood without modeling the
 mechanism; and an augmented-candidate-set rank condition says when the
 latent parameter is identifiable from the coarsened data. That paper
-treats series-system reliability. Five sibling papers carry the same
+treats series-system reliability. Six sibling papers carry the same
 skeleton into other domains: scRNA-seq dropout
 \citep{towell2026scrnacoarsening}, spatial-transcriptomics
 deconvolution \citep{towell2026spatialcoarsening}, differential
 privacy \citep{towell2026dpcoarsening}, programmatic weak supervision
-\citep{towell2026weaksupcoarsening}, and electronic-health-record
-phenotyping \citep{towell2026phenotypecoarsening}. A robustness study
+\citep{towell2026weaksupcoarsening}, electronic-health-record
+phenotyping \citep{towell2026phenotypecoarsening}, and multiple-instance
+learning \citep{towell2026milcoarsening}. A robustness study
 \citep{towell2026mdrelax} treats sensitivity to the symmetry condition
 C2.
 
@@ -48,9 +49,12 @@ empirical pairwise agreement rates of the labeling functions. In
 phenotyping it is \emph{code-frequency consistency}: the fitted code
 frequency $\hat\pi\,\widehat{\mathrm{sens}} +
 (1-\hat\pi)(1-\widehat{\mathrm{spec}})$ equals the empirical code
-frequency $\bar C$. The five identities have the same content and the
+frequency $\bar C$. In multiple instance learning it is
+\emph{bag-prevalence consistency}: the fitted bag-positive probabilities
+reproduce the observed bag-positive rates along the column space of the
+bag composition matrix. The six identities have the same content and the
 same practical moral, that marginal-fit agreement is not evidence of
-unbiasedness, yet they are stated and proved five times.
+unbiasedness, yet they are stated and proved six times.
 
 A second result recurs the same way. Each sibling needs to know when
 the latent parameter is recoverable, and answers with the
@@ -59,8 +63,8 @@ And each sibling identifies the same remedy when identifiability
 fails: a \emph{singleton} candidate set, a report that pins the latent
 quantity to a point. The singleton wears a different costume in each
 field, an ERCC spike-in, a single-cell-resolution probe, a gold label,
-a non-private release, a chart-reviewed patient, but it is the same
-device.
+a non-private release, a chart-reviewed patient, a singleton bag, but it
+is the same device.
 
 \subsection{Contribution: state it once}
 
@@ -77,7 +81,7 @@ specialization. The contributions are the following.
   the seam-free half of the synthesis. We state the
   augmented-candidate-set rank condition once and the
   singleton-restoration result once, and show that one $|c| = 1$ device
-  restores the same column rank across all six domains, with the
+  restores the same column rank across all seven domains, with the
   per-domain singletons tabulated as instances of a single mechanism
   (\cref{tab:singletons}). This half carries no caveats and is not
   reducible to a textbook identity.
@@ -89,9 +93,9 @@ specialization. The contributions are the following.
   regular-exponential-family regime where the equality is exact in
   finite samples and a location-family regime where it is exact at a
   single report and a population first-moment identity otherwise, and
-  we recover cell-total, spot-level, release, agreement, and
-  code-frequency consistency as corollaries
-  (\cref{cor:scrna,cor:spatial,cor:dp,cor:weaksup,cor:phenotype}),
+  we recover cell-total, spot-level, release, agreement,
+  code-frequency, and bag-prevalence consistency as corollaries
+  (\cref{cor:scrna,cor:spatial,cor:dp,cor:weaksup,cor:phenotype,cor:mil}),
   saying precisely which are exact, which are asymptotic, and which hold
   only under a richer parametrization.
 \item A compact applications tour (\cref{sec:applications}) showing
@@ -99,18 +103,18 @@ specialization. The contributions are the following.
   domain-specific development rather than re-deriving it.
 \end{enumerate}
 
-The claim is unification, not new mathematics. The five named
+The claim is unification, not new mathematics. The six named
 consistency theorems and the per-domain rank conditions already exist
 in the siblings; the contribution is to show they are one theorem and
 one condition, to state them at the right level, and to be precise
 about where the unification is clean and where it is seamed. The count
-is six domains but five named consistency corollaries: reliability
+is seven domains but six named consistency corollaries: reliability
 \citep{towell2026masked} is the source of the shared framework and of
-the singleton-and-rank apparatus, so it appears among the six domains
+the singleton-and-rank apparatus, so it appears among the seven domains
 and contributes a singleton device (\cref{tab:singletons}), but its
 consistency content is the general identity itself rather than a
 separately named corollary, which is why the consistency corollaries
-number five. Two seams
+number six. Two seams
 matter and we flag them in advance. The weak-supervision corollary is
 exact only for a parametrization in which the agreement statistics are
 sufficient; the standard naive-Bayes label model satisfies the
@@ -119,7 +123,7 @@ in the exponential-family branch at all: its release-consistency
 identity is a first-moment statement for a continuous location family,
 proved through the location-family score, and it is recovered from the
 location-family branch of the general theorem rather than from the
-exponential-family branch that serves the other four domains. Naming
+exponential-family branch that serves the other five domains. Naming
 these seams is part of the contribution, because a synthesis that
 hides them would misrepresent what is shared.
 
@@ -138,7 +142,7 @@ Second, the singleton-and-rank half of the paper is not elementary
 moment-matching at all: the augmented-candidate-set rank condition and
 the singleton-restoration result are a genuine identifiability device,
 and showing that one $|c| = 1$ construction restores the same column
-rank across six domains is the harder and less attackable claim. Third,
+rank across seven domains is the harder and less attackable claim. Third,
 the discovery that differential privacy does \emph{not} fit the
 exponential-family box, and forces a structurally distinct
 location-family regime with a precisely located boundary

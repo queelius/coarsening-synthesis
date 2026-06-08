@@ -1,7 +1,7 @@
 \section{The general consistency theorem}
 \label{sec:consistency}
 
-We state the identity that the siblings rediscover under five names,
+We state the identity that the siblings rediscover under six names,
 then recover each as a corollary. The identity is a stationarity
 consequence: at an interior maximum of the face-value likelihood, the
 fitted model must reproduce the empirical mean of the
@@ -157,7 +157,7 @@ therefore never evidence of unbiasedness; detecting bias requires the
 singleton candidate sets of \cref{sec:identifiability} or external
 information.
 
-\subsection{The five named corollaries}
+\subsection{The six named corollaries}
 
 Each named consistency theorem is \cref{thm:general-consistency} read
 in the coordinates of \cref{tab:css}. We state them compactly and flag
@@ -208,6 +208,29 @@ $(\pi, \mathrm{sens}, \mathrm{spec})$ only through the scalar $q$, so
 consistency pins $q$ but not the triple: the $3 \to 1$ collapse is
 exactly why the chart-review singleton of \cref{sec:identifiability} is
 needed to recover the individual parameters.
+\end{corollary}
+
+\begin{corollary}[Bag-prevalence consistency, multiple instance learning]
+\label{cor:mil}
+Take regime (A) with the bag-level Bernoulli report law under the
+logical-OR aggregation rule, fitted bag-positive probability $\hat p_i =
+1 - \exp(-\bm m_i^\top \hat{\bm s})$ for the bag-by-instance-type
+composition row $\bm m_i$ and instance-type positivity parameter
+$\bm s$, and $\T(Y) = Y$ the bag label. Then
+\eqref{eq:general-consistency} reads $M^\top D^{-1}(\bm Y - \hat{\bm p})
+= \bm 0$, with $M$ the composition matrix and $D =
+\operatorname{diag}(\hat{\bm p})$: along every direction in the column
+space of $M$ the fitted and observed bag-positive counts coincide. This
+is the bag-prevalence consistency theorem of
+\citet{towell2026milcoarsening}. The bag label is Bernoulli, a regular
+exponential family, so the reduction is exact; the inverse-fitted-rate
+weighting $D^{-1}$ is the only wrinkle, the variance-link factor of the
+log-survival (noisy-OR) link, which is not the Bernoulli canonical link,
+so the moment matching is IRLS-weighted rather than unweighted. As in
+spatial transcriptomics, the \emph{vector} statement over instance types
+additionally requires the joint rank condition of \cref{thm:general-rank},
+here full column rank of $M$, and the moral is the sibling's: bag-level
+accuracy cannot validate instance-level scores.
 \end{corollary}
 
 \begin{corollary}[Agreement consistency, weak supervision]
@@ -274,6 +297,7 @@ apologies.
 Cell-total (scRNA) & (A) & $\bullet$ & Exact finite-sample identity. ZINB is a regular exponential family with mean-parameterized score. \\
 Spot-level (spatial) & (A) & $\bullet$ & Exact finite-sample identity per coordinate; the vector form additionally uses the joint rank condition (\cref{thm:general-rank}). \\
 Code-frequency (phenotype) & (A) & $\bullet$ & Exact finite-sample identity in the informative regime $\mathrm{sens} + \mathrm{spec} > 1$ (nonzero mean gradient). \\
+Bag-prevalence (MIL) & (A) & $\bullet$ & Exact finite-sample identity; the moment matching is IRLS-weighted by the noisy-OR link, and the vector form over instance types uses the joint rank condition (\cref{thm:general-rank}). \\
 Agreement (weak sup.) & (A) & $\circ$ & Exact finite-sample identity when the agreement indicators are sufficient statistics; asymptotic at the $n^{-1/2}$ rate for the naive-Bayes parametrization. Gold-set restoration of identifiability under labeling-function dependence costs $\Theta(r/\mathrm{gap}^2)$ gold labels for total (L2) model recovery, in the parameter-degeneracy dimension $r$ and accuracy margin. \\
 Release (DP) & (B) & $\triangleright$ & Location-family branch, not regime (A). Exact at the single release ($n = 1$) for any symmetric unimodal kernel; the population first-moment identity. \\
 \bottomrule
@@ -284,7 +308,7 @@ exponential-family regime (A); $\circ$ exact under a sufficiency-complete
 parametrization, asymptotic ($n^{-1/2}$) otherwise; $\triangleright$
 recovered through the location-family regime (B), exact at the single
 release and as a population first-moment identity. The boundary is
-located precisely rather than asserted: three domains are exact via
+located precisely rather than asserted: four domains are exact via
 regime (A), one is exact under the right parametrization and asymptotic
 otherwise, and differential privacy is the single-release identity of
 the location branch.}

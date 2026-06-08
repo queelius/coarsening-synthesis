@@ -67,7 +67,10 @@ exactly when $A$ has full column rank \citep{towell2026dpcoarsening};
 in weak supervision it is the agreement matrix whose off-diagonal is
 rank one under conditional independence, with a rank deficit $r$
 induced by labeling-function dependence
-\citep{towell2026weaksupcoarsening}. Each is the same rank condition
+\citep{towell2026weaksupcoarsening}; in multiple instance learning it
+is the bag-by-instance-type composition matrix $M$, identifiable exactly
+when $M$ has full column rank \citep{towell2026milcoarsening}. Each is
+the same rank condition
 on the augmented coarsening operator. The autopsy-model ancestry of
 the finite case is \citet{meilijson1981}; the competing-risks
 nonidentifiability without independence is \citet{tsiatis1975}.
@@ -103,7 +106,7 @@ basis-covering set suffices.
 \end{proof}
 
 The content of \cref{prop:singleton} is that the recovery devices the
-five fields invented independently are one device. \Cref{tab:singletons}
+six fields invented independently are one device. \Cref{tab:singletons}
 makes the identification explicit.
 
 \begin{table}[ht]
@@ -131,6 +134,9 @@ Weak supervision \citep{towell2026weaksupcoarsening} &
 Phenotyping \citep{towell2026phenotypecoarsening} &
   A chart-reviewed (adjudicated) patient &
   The true disease state, hence sens/spec \\
+Multiple instance learning \citep{towell2026milcoarsening} &
+  A singleton bag (an instance-level label) &
+  The instance's true positivity, hence instance-level scores \\
 \bottomrule
 \end{tabular}
 \caption{The singleton candidate set in each domain. These are not

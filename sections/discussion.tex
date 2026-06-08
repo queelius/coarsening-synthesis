@@ -4,9 +4,9 @@
 \subsection{What the unification buys}
 
 Three things. First, economy: a single theorem and a single rank
-condition replace five named theorems and five rank arguments, and a
+condition replace six named theorems and six rank arguments, and a
 result proved once at the right generality is easier to extend than
-five parallel proofs. A new domain that fits the abstract process of
+six parallel proofs. A new domain that fits the abstract process of
 \cref{sec:framework} inherits consistency, identifiability, and the
 singleton remedy without a fresh derivation; the only domain-specific
 work is to identify the latent variable, the report, the
@@ -39,7 +39,7 @@ sharper than a blanket exact-for-all-domains claim, and both are
 characterized rather than left open.
 
 \paragraph{Differential privacy is a location family, not an
-exponential family.} The other four consistency theorems are the
+exponential family.} The other five consistency theorems are the
 exponential-family mean-value identity (regime A). Release consistency
 is a first-moment identity for a continuous convolution (regime B),
 proved through the location-family score. The two are instances of one
@@ -99,6 +99,13 @@ the common structure.
   \citet{towell2026mdrelax} are worked out for reliability; porting the
   bounded-C2-violation analysis to the other domains is open and would
   give each a robustness counterpart to its consistency theorem.
+\item \textbf{Multiple instance learning, identifiability versus
+  predictive competitiveness.} Restoring identifiability (the rank
+  condition and singleton bags) stabilizes instance-level estimation but
+  does not by itself make the instance-level model predictively
+  competitive on the bag task; closing that gap, and the
+  continuous-feature rank reduction it calls for, remains open
+  \citep{towell2026milcoarsening}.
 \end{itemize}
 
 \subsection{Relation to the coarsening-at-random literature}
@@ -108,10 +115,10 @@ The framework is a specialization of coarsening at random
 missing-data ignorability tradition \citep{little2002statistical,tsiatis2006semiparametric}.
 What is new here is not the CAR conditions, which are classical, but the
 observation that one consistency identity and one rank condition recur
-across six concrete fields as instances of those conditions, and the
-explicit reduction of the five named theorems to a single statement
+across seven concrete fields as instances of those conditions, and the
+explicit reduction of the six named theorems to a single statement
 with a clean account of the two regimes and the two seams. The
 exponential-family mean-value identity that powers regime (A) is itself
 textbook \citep{vandervaart1998asymptotic}; the contribution is to
-recognize that the five named theorems are that identity wearing five
+recognize that the six named theorems are that identity wearing six
 costumes.
