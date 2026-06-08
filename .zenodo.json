@@ -1,0 +1,30 @@
+{
+  "title": "One consistency theorem for coarsened-data maximum likelihood: a cross-domain synthesis of the coarsening-at-random framework",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "description": "<p>A recurring statistical structure appears, under different names, across reliability, single-cell and spatial genomics, differential privacy, programmatic weak supervision, and electronic-health-record phenotyping. In each, a latent quantity is observed only through a coarsening: a candidate set, a dropout, a noised release, a vote, a diagnostic code.</p><p>Two results recur. The first is seam-free across all six domains: an augmented-candidate-set rank condition decides when the latent parameter is identifiable, and a singleton candidate set (a report that pins the latent quantity to a point) restores identifiability by restoring column rank. The singleton wears a different costume in each field (spike-ins, single-cell-resolution probes, gold labels, non-private releases, chart review) but is one mechanism, stated once. The second recurring result is a consistency identity at the maximum-likelihood fit: under the coarsening-at-random conditions C1, C2, C3, the face-value likelihood can be maximized without modeling the coarsening, and the fit reproduces the empirical mean of a coarsening-sufficient statistic at the optimum. This identity has been stated five separate times (cell-total consistency in single-cell data, its spot-level variant in spatial deconvolution, release consistency for differential privacy, agreement consistency for weak supervision, and code-frequency consistency for phenotyping); we state it once and recover each named version as a special case, and we locate its boundary exactly. In a regular exponential family the identity is an exact finite-sample equality; in a location family it is exact for a single report and a population first-moment identity otherwise, with the finite-sample sample-mean form holding exactly only for the Gaussian kernel (which itself sits in the exponential-family regime). The empirical weight is carried by the sibling papers, which are cited rather than re-derived.</p>",
+  "version": "v0.1.0",
+  "language": "eng",
+  "license": {"id": "CC-BY-4.0"},
+  "keywords": [
+    "coarsening at random",
+    "masked-data inference",
+    "identifiability",
+    "maximum likelihood",
+    "exponential family",
+    "consistency",
+    "reliability",
+    "single-cell RNA-seq",
+    "spatial transcriptomics",
+    "differential privacy",
+    "weak supervision",
+    "electronic phenotyping"
+  ],
+  "creators": [
+    {
+      "name": "Towell, Alexander",
+      "orcid": "0000-0001-6443-9897",
+      "affiliation": "Southern Illinois University Edwardsville"
+    }
+  ]
+}

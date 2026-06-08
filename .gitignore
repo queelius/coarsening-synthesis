@@ -1,0 +1,25 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.latexml.log
+sections/*.aux
+
+# Built paper PDF (re-buildable via `make paper`)
+main.pdf
+
+# Conversion backups (imsart reformat left these behind)
+*.article-bak
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store

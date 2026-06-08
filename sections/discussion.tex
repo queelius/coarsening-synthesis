@@ -1,0 +1,117 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{What the unification buys}
+
+Three things. First, economy: a single theorem and a single rank
+condition replace five named theorems and five rank arguments, and a
+result proved once at the right generality is easier to extend than
+five parallel proofs. A new domain that fits the abstract process of
+\cref{sec:framework} inherits consistency, identifiability, and the
+singleton remedy without a fresh derivation; the only domain-specific
+work is to identify the latent variable, the report, the
+coarsening-sufficient statistic, and the singleton, which is the
+content of \cref{tab:css,tab:singletons}.
+
+Second, a shared diagnostic moral. The single sentence that
+\cref{thm:general-consistency} licenses, marginal-fit agreement is not
+evidence of unbiasedness, is exactly the warning each sibling issues in
+its own terms. Stating it once makes clear that it is a property of
+coarsened-data MLE in general, not a quirk of dropout or of noised
+releases or of imperfect codes. The practitioner check ``does my fitted
+model reproduce the observed marginal'' is structurally uninformative
+about the latent parameter in every one of these settings, and the only
+cures are the singleton device or external information.
+
+Third, transfer of remedies. Because the singletons are one mechanism
+(\cref{prop:singleton}), a technique developed for one field's singleton
+can in principle be ported to another's: the spike-in-fit bias analysis
+of \citet{towell2026scrnacoarsening} and the gold-set sample-complexity
+analysis of \citet{towell2026weaksupcoarsening} are asking the same
+question, how much singleton information is needed, and their answers
+are comparable through the rank deficit.
+
+\subsection{The boundary of the principle}
+
+A unification is most useful when its boundary is located exactly, not
+asserted. The consistency identity has two places where the reach is
+sharper than a blanket exact-for-all-domains claim, and both are
+characterized rather than left open.
+
+\paragraph{Differential privacy is a location family, not an
+exponential family.} The other four consistency theorems are the
+exponential-family mean-value identity (regime A). Release consistency
+is a first-moment identity for a continuous convolution (regime B),
+proved through the location-family score. The two are instances of one
+stationarity principle, but regime (B) is not a corollary of regime
+(A). Within regime (B) the boundary is exact: the location MLE equals
+the arithmetic sample mean for every sample if and only if the kernel
+is Gaussian (\cref{rem:loc-sketch}), the Cauchy-equation characterization
+whose classical face is Gauss's characterization of the normal law.
+Release consistency lives at the single release ($n = 1$), where the
+identity is exact for any symmetric unimodal kernel; for $n \ge 3$ and a
+non-Gaussian kernel the sample-mean form picks up a genuine
+$O_p(n^{-1/2})$ remainder, and the Gaussian case is already covered by
+regime (A) because the Gaussian location family is an exponential
+family. There is nothing left open here: the finite-sample failure is
+exactly the failure of the score to be linear.
+
+\paragraph{Weak supervision reduces exactly only under a richer
+parametrization.} Agreement consistency is exact when the agreement
+indicators are sufficient statistics, but the naive-Bayes label model
+that data programming actually uses does not make them sufficient, and
+there the identity is asymptotic (\cref{cor:weaksup}). The unification
+holds in both cases; the exact statement is for a parametrization
+practitioners do not use, and for the one they do use the result is a
+limit theorem.
+
+A third, milder boundary: the spatial spot-level identity is exact per
+coordinate but its vector form leans on the joint rank condition
+(\cref{cor:spatial}), so consistency and identifiability are not as
+cleanly separable there as in the scalar domains.
+
+\subsection{Open per-domain problems}
+
+The synthesis inherits the siblings' open problems and locates them in
+the common structure.
+\begin{itemize}
+\item \textbf{Weak supervision, the rank-deficit factor.} The gold-set
+  sample complexity is settled at $\Theta(r/\mathrm{gap}^2)$ for total
+  (L2) model recovery, with matching upper and minimax lower bounds, in
+  the parameter-degeneracy dimension $r$ and the accuracy margin; the
+  rate is loss-dependent (it falls to $\Theta(\log r/\mathrm{gap}^2)$
+  under a per-direction criterion). What remains open is estimating the
+  degeneracy dimension $r$ from data and the multiclass extension
+  \citep{towell2026weaksupcoarsening}.
+\item \textbf{Phenotyping, real data and chart-review error.} The
+  chart-reviewed state is treated as a true singleton; adjudication is
+  itself imperfect, which is a relaxation of the singleton assumption,
+  and a real-data validation remains to be done
+  \citep{towell2026phenotypecoarsening}.
+\item \textbf{Differential privacy, finite-sample multi-release
+  corrections.} The single-release identity is exact and the
+  Gaussian-iff characterization of the sample-mean form is settled
+  (\cref{rem:loc-sketch}); what remains optional, not open, is
+  tabulating the leading constant $V = \operatorname{Var}(\psi(Z)/J - Z)$
+  of the $O_p(n^{-1/2})$ remainder for the standard release kernels if a
+  finite-sample correction over several releases is wanted.
+\item \textbf{C2 violations, quantitatively.} The sensitivity bands of
+  \citet{towell2026mdrelax} are worked out for reliability; porting the
+  bounded-C2-violation analysis to the other domains is open and would
+  give each a robustness counterpart to its consistency theorem.
+\end{itemize}
+
+\subsection{Relation to the coarsening-at-random literature}
+
+The framework is a specialization of coarsening at random
+\citep{heitjan1991ignorability,gill1997coarsening} and of the
+missing-data ignorability tradition \citep{little2002statistical,tsiatis2006semiparametric}.
+What is new here is not the CAR conditions, which are classical, but the
+observation that one consistency identity and one rank condition recur
+across six concrete fields as instances of those conditions, and the
+explicit reduction of the five named theorems to a single statement
+with a clean account of the two regimes and the two seams. The
+exponential-family mean-value identity that powers regime (A) is itself
+textbook \citep{vandervaart1998asymptotic}; the contribution is to
+recognize that the five named theorems are that identity wearing five
+costumes.

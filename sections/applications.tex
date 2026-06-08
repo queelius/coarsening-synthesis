@@ -1,0 +1,91 @@
+\section{The domains as instances}
+\label{sec:applications}
+
+Each domain is one instantiation of \cref{sec:framework,sec:consistency,sec:identifiability}.
+We give one short subsection per domain, fixing the latent variable,
+the report, the coarsening-sufficient statistic, and the singleton, and
+citing the sibling for the domain-specific development, validation, and
+data analysis. Nothing here is re-derived.
+
+\subsection{Reliability: masked causes in series systems}
+
+The latent $\Y$ is the failed component $K_i$ of a series system; the
+report is a candidate set $c_i$ of suspect components produced by a
+diagnostic; the singleton is a diagnostic that resolves the cause. C1
+is diagnostic competence, C2 is structural (group-level) masking, C3 is
+calibration fixed before failures are observed. This is the
+foundational paper \citep{towell2026masked}, which supplies the
+C1--C2--C3 likelihood, the augmented-candidate-set rank condition
+(\cref{thm:general-rank}), and the regularity conditions the abstract
+process inherits. The robustness of estimates to C2 violations, with
+sensitivity bands, is \citet{towell2026mdrelax}.
+
+\subsection{scRNA-seq: dropout as coarsening}
+
+The latent $\Y$ is the true transcript count; the report is the
+observed count, coarsened by a dropout that maps some positive counts
+to zero; the coarsening-sufficient statistic is the count $X$; the
+singleton is an ERCC spike-in of known input. Cell-total consistency
+(\cref{cor:scrna}) is the regime-(A) identity for the ZINB family. The
+sibling \citep{towell2026scrnacoarsening} adds a bias bound for the
+spike-in-fit oracle as a function of the ERCC-versus-endogenous capture
+ratio, validates cell-total consistency on simulated data and on Tabula
+Muris tissue \citep{tabula2018single}, and positions the result
+against the zero-inflation controversy \citep{jiang2022zero}.
+
+\subsection{Spatial transcriptomics: deconvolution as coarsening}
+
+The latent $\Y$ is the cell-type composition of a spot together with
+cell-type-specific expression; the report is the spot's mixed
+expression vector; the coarsening-sufficient statistic is the spot
+count $X_{sj}$; the singleton is a single-cell-resolution probe. The
+spot-level identity (\cref{cor:spatial}) is the regime-(A) identity for
+the spot Poisson model, and the rank condition specializes to full
+column rank of the spot-by-cell-type composition matrix $P$. The
+sibling \citep{towell2026spatialcoarsening} works out the rank
+condition, the consistency identity, and the relation to RCTD
+\citep{cable2021robust} on spatial data \citep{stahl2016visualization}.
+
+\subsection{Differential privacy: the noised release as coarsening}
+
+The latent $\Y$ is the true query value $q(D)$ and the functional
+$\theta$ behind it; the report is the noised release $M = q(D) + Z$;
+the coarsening-sufficient statistic is $M$ itself; the singleton is a
+non-private release. This domain sits in regime (B): release
+consistency (\cref{cor:dp}) is the location-family first-moment
+identity, not the exponential-family one. The coarsening is engineered,
+so C3 holds by construction (the curator publishes the scale), C2
+partitions the mechanisms (data-independent mechanisms satisfy it,
+data-dependent ones violate it), and the sibling
+\citep{towell2026dpcoarsening} adds a compositional identifiability
+calculus for adaptive composition and a simulation. The
+analyst-side framing complements the curator-side statistical-DP
+literature \citep{wasserman2010statistical,dwork2014algorithmic}.
+
+\subsection{Weak supervision: votes as coarsening}
+
+The latent $\Y$ is the true label; the report is the vote vector of the
+labeling functions; the coarsening-sufficient statistic is the pairwise
+agreement indicator; the singleton is a gold-labeled example. Agreement
+consistency (\cref{cor:weaksup}) is the regime-(A) identity under a
+sufficiency-complete parametrization and asymptotic for the naive-Bayes
+label model of data programming \citep{ratner2016data}, whose ancestor
+is the Dawid--Skene error-rate model \citep{dawid1979maximum}. The
+sibling \citep{towell2026weaksupcoarsening} works out the conditional-
+independence identifiability theorem, the rank deficit induced by
+labeling-function dependence, and the gold-set sample complexity.
+
+\subsection{Phenotyping: diagnostic codes as coarsening}
+
+The latent $\Y$ is the patient's true disease state; the report is a
+billing or diagnostic code; the coarsening-sufficient statistic is the
+code indicator $C$; the singleton is a chart-reviewed patient.
+Code-frequency consistency (\cref{cor:phenotype}) is the regime-(A)
+identity for the single-code Bernoulli model, and the
+chart-review-calibrated estimator is the Rogan--Gladen prevalence
+correction \citep{rogan1978estimating} with the two error rates
+estimated rather than assumed; the two-code, no-chart-review corner is a
+Hui--Walter latent-class model \citep{hui1980estimating}. The sibling
+\citep{towell2026phenotypecoarsening} develops the glass ceiling, the
+identifiability-with-chart-review theorem, and the informative-coding
+bias bound.

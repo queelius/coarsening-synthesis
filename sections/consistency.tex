@@ -1,0 +1,292 @@
+\section{The general consistency theorem}
+\label{sec:consistency}
+
+We state the identity that the siblings rediscover under five names,
+then recover each as a corollary. The identity is a stationarity
+consequence: at an interior maximum of the face-value likelihood, the
+fitted model must reproduce the empirical mean of the
+coarsening-sufficient statistic. The cleanest hypothesis under which
+this holds as an exact finite-sample equality is that the face-value
+model is a regular exponential family; a second, structurally
+different, hypothesis covers the continuous additive-noise case through
+the location-family score, where the equality is exact for a single
+report, holds as a first-moment identity in the population, and holds
+in finite samples up to an $O_p(n^{-1/2})$ remainder.
+
+\subsection{The theorem}
+
+\begin{theorem}[Coarsened-data consistency at the MLE]
+\label{thm:general-consistency}
+Let the face-value model \eqref{eq:fw-likelihood} be maximized at an
+interior point $\hat\theta$ of $\Theta$, and let $\T$ be the
+coarsening-sufficient statistic of \cref{sec:css} with model-implied
+mean $m(\theta) = \E_\theta[\T(R)]$. Suppose one of the following
+regularity regimes holds.
+\begin{enumerate}[(A)]
+\item \textbf{Regular exponential family.} The coarsened report law
+  $p(r \mid \theta)$ is a regular exponential family with natural
+  sufficient statistic $\T(R)$ and natural parameter $\eta(\theta)$
+  whose Jacobian $\partial\eta / \partial\theta$ has full column rank
+  at $\hat\theta$. The Gaussian location family is the leading instance
+  with $\T(R) = R$, so the additive-noise case with a Gaussian kernel
+  falls here.
+\item \textbf{Location family.} The coarsened report law is a location
+  family in a scalar functional $\mu(\theta)$, that is, $p(r \mid
+  \theta) = p_0(r - \mu(\theta))$ for a fixed symmetric, log-concave
+  density $p_0$ with finite mean, and $\T(R) = R$.
+\end{enumerate}
+In regime (A) the fitted mean of the coarsening-sufficient statistic
+equals its empirical mean as an exact finite-sample identity, in every
+coordinate of $\T$,
+\begin{equation}
+  m(\hat\theta) \;=\; \bar\T,
+  \qquad \bar\T = \frac1n \sum_{i=1}^n \T(R_i),
+  \label{eq:general-consistency}
+\end{equation}
+up to optimization tolerance. In regime (B) the corresponding scalar
+statement $\mu(\hat\theta) = \bar R$ holds in three precise senses: it
+is exact for a single report ($n = 1$); it is the population
+first-moment identity $\E_{\hat\theta,\kappa}[M] = m_{\mathrm{obs}}$ for
+any $n$; and for $n > 1$ it holds in finite samples up to an error of
+order $n^{-1/2}$, with $\sqrt{n}\,(\hat\mu - \bar R)$ asymptotically
+normal. It is \emph{not} an exact finite-sample sample-mean identity
+for $n \ge 3$ unless $p_0$ is Gaussian (in which case the report law is
+already an exponential family and the exact identity is the regime-(A)
+statement). What regime (B) reproduces exactly in finite samples is the
+sample $\psi$-location, $m(\hat\theta) = \hat\mu$ with $\hat\mu$ solving
+$\sum_i \psi(R_i - \hat\mu) = 0$, $\psi = -p_0'/p_0$; see
+\cref{rem:loc-sketch}. In both regimes any bias in $\hat\theta$
+relative to the true $\theta$ is absorbed into the part of the model
+orthogonal to $\T$ (the coarsening-induced nuisance), and a check that
+compares the fitted mean of $\T$ to its empirical value cannot detect
+that bias.
+\end{theorem}
+
+\begin{proof}
+\emph{Regime (A).} For a regular exponential family $p(r \mid \theta)
+= h(r)\exp\{\eta(\theta)^\top \T(r) - A(\eta(\theta))\}$ the
+face-value log-likelihood is $\ell(\theta) = \sum_i [\eta(\theta)^\top
+\T(R_i) - A(\eta(\theta))] + \text{const}$. Its gradient in the
+natural parameter is the mean-value identity for exponential families:
+$\partial_\eta \ell = \sum_i \T(R_i) - n\,\nabla A(\eta) = n(\bar\T -
+\E_\eta[\T])$, since $\nabla A(\eta) = \E_\eta[\T]$ is the standard
+log-partition gradient \citep[Ch.~5]{vandervaart1998asymptotic}. By
+the chain rule $\partial_\theta \ell = (\partial\eta/\partial\theta)^\top
+\partial_\eta \ell$. At an interior maximum $\partial_\theta
+\ell(\hat\theta) = 0$, and since $\partial\eta/\partial\theta$ has full
+column rank, $\partial_\eta \ell = 0$, hence $\E_{\hat\theta}[\T] =
+\bar\T$. This is \eqref{eq:general-consistency} coordinatewise, and
+$m(\hat\theta) = \E_{\hat\theta}[\T]$ by definition.
+
+\emph{Regime (B).} For a location family $p(r \mid \theta) = p_0(r -
+\mu)$ with $\mu = \mu(\theta)$, the score in $\mu$ satisfies the
+location identity $\partial_\mu \log p(r \mid \theta) = -p_0'(r -
+\mu)/p_0(r - \mu) = -\partial_r \log p(r \mid \theta)$. The
+face-value first-order condition in $\mu$ is $\sum_i \partial_\mu \log
+p(R_i \mid \hat\theta) = 0$, equivalently $\sum_i \psi(R_i - \hat\mu) =
+0$ for $\psi = -p_0'/p_0$. For $p_0$ symmetric and log-concave, $\psi$
+is odd and nondecreasing, so $\sum_i \psi(R_i - \hat\mu)$ is strictly
+decreasing in $\hat\mu$ and the first-order condition has a unique
+interior root: $\hat\mu$ is the sample $\psi$-location, and the exact
+finite-sample identity is $m(\hat\theta) = \hat\mu$. Since
+$\T(R) = R$ and $\E[Z] = 0$ for the symmetric kernel,
+$m(\theta) = \mu(\theta)$, so this reproduces $\hat\mu$ exactly. The
+sample-mean form $\mu(\hat\theta) = \bar R$ requires $\hat\mu = \bar R$,
+that is, $\psi$ linear; the only symmetric kernel with linear score is
+the Gaussian, where the report law is an exponential family and the
+exact identity is the regime-(A) statement. For a single report the
+$\psi$-location is $R$ itself for any symmetric unimodal $p_0$, so
+$\hat\mu = R$ exactly at $n = 1$. For $n > 1$ and a non-Gaussian
+kernel, $\hat\mu$ and $\bar R$ are both consistent for the same
+location, and standard $M$-estimator theory
+\citep[Ch.~5]{vandervaart1998asymptotic} gives $\sqrt{n}\,(\hat\mu -
+\bar R) \to \mathcal{N}(0, V)$ with $V = \operatorname{Var}(\psi(Z)/J -
+Z)$, $J = \E[\psi'(Z)]$, so $\mu(\hat\theta) = \bar R$ holds in finite
+samples up to $O_p(n^{-1/2})$. The population first-moment form
+$\E_{\hat\theta,\kappa}[M] = m_{\mathrm{obs}}$, which the
+differential-privacy sibling proves \citep{towell2026dpcoarsening}, is
+the $n = 1$ case and the $n \to \infty$ limit of this statement; see
+\cref{rem:loc-sketch}.
+\end{proof}
+
+\begin{remark}[The boundary of the location-family branch, characterized]
+\label{rem:loc-sketch}
+Regime (A) is an exact finite-sample identity: the exponential-family
+mean-value identity holds at any interior optimum and the rank
+hypothesis is the only ingredient. Regime (B)'s exact finite-sample
+content is $m(\hat\theta) = \hat\mu$ with $\hat\mu$ the sample
+$\psi$-location (the median for the Laplace kernel, the
+$\tanh$-location for logistic, the sample mean for Gaussian). The
+sample-mean form $\mu(\hat\theta) = \bar R$ is exactly characterized
+\citep{teicher1961maximum}: the location MLE equals the arithmetic
+sample mean for every sample if and only if the kernel is Gaussian. The
+reason is short. Stationarity
+of the log-likelihood at $\bar R$ for every sample is $\sum_i \psi(r_i)
+= 0$ over the sum-zero residual hyperplane; specializing to $n = 3$
+turns this into Cauchy's functional equation $\psi(a) + \psi(b) =
+\psi(a + b)$, whose continuous (or monotone) solutions are linear,
+forcing $\log p_0$ quadratic, that is, Gaussian. The classical face of
+this is Gauss's characterization of the normal law as the unique
+location family whose most probable value is the arithmetic mean, made
+precise as the maximum-likelihood characterization of the normal by
+\citet{teicher1961maximum} and placed in the broader characterization
+theory of \citet{kagan1973characterization}. The
+failure is therefore not an artifact and first appears at $n = 3$: on
+data $(0, 1, 5)$ the Laplace MLE is the median $1$ against the mean
+$2$, an exact gap of $-1$, and the logistic MLE sits at a strict,
+smooth interior maximum a fixed distance from the mean, ruling out any
+appeal to a kink in $\psi$. For $n \ge 3$ and a non-Gaussian kernel
+the residual $\mu(\hat\theta) - \bar R$ is genuinely nonzero and of
+order $n^{-1/2}$ (proof of the theorem), and the population first-moment
+identity $\E_{\hat\theta,\kappa}[M] = m_{\mathrm{obs}}$ of
+\citet{towell2026dpcoarsening} is its $n = 1$ and limiting form.
+Log-concavity (not mere unimodality) of $p_0$ is what makes $\hat\mu$ a
+unique interior maximizer: a symmetric unimodal but non-log-concave
+kernel such as Student-$t_2$ can give a bimodal likelihood with the
+mean at a local minimum, so the identity is not even well posed. The
+two regimes are not nested: (A) is a curved constraint on a discrete or
+count report, (B) is a location shift of a continuous report, and the
+differential-privacy identity is recovered only from (B).
+\end{remark}
+
+The single moral, stated once, is the warning each sibling issues:
+because \eqref{eq:general-consistency} constrains only the mean of
+$\T$, two parameter values that imply the same $m(\theta)$ but
+different latent structure both satisfy it. Marginal-fit agreement is
+therefore never evidence of unbiasedness; detecting bias requires the
+singleton candidate sets of \cref{sec:identifiability} or external
+information.
+
+\subsection{The five named corollaries}
+
+Each named consistency theorem is \cref{thm:general-consistency} read
+in the coordinates of \cref{tab:css}. We state them compactly and flag
+the two that do not reduce by regime (A) alone.
+
+\begin{corollary}[Cell-total consistency, scRNA-seq]
+\label{cor:scrna}
+Take regime (A) with the zero-inflated negative-binomial report law
+for gene $j$ and $\T(X) = X$. Then $m(\hat\theta) = (1 -
+\hat\pi_j)\hat\mu_j$ and \eqref{eq:general-consistency} reads $(1 -
+\hat\pi_j)\hat\mu_j = \bar X_j$. This is the cell-total consistency
+theorem of \citet{towell2026scrnacoarsening}. The reduction is exact:
+the ZINB observed-count law is a regular exponential family with the
+mean-parameterized score $\partial_\mu \log g(x; \mu, \phi) = (x -
+\mu)/[\mu(1+\mu\phi)]$, which is the regime-(A) hypothesis.
+\end{corollary}
+
+\begin{corollary}[Spot-level consistency, spatial transcriptomics]
+\label{cor:spatial}
+Take regime (A) with the spot-level Poisson report law of mean $N_s
+\sum_k p_{s,k}\mu_{j,k}$ and $\T(X_{sj}) = X_{sj}$, both $\bm\mu_j$ and
+$\bm p_s$ unconstrained at the optimum. Then
+\eqref{eq:general-consistency} reads $\sum_k \hat P_{sk}\hat\mu_{j,k} =
+\bar X_{sj}$, the cell-total consistency theorem of
+\citet{towell2026spatialcoarsening}. The Poisson law is a regular
+exponential family, so the per-coordinate identity is exact; the
+\emph{vector} statement over $(s,j)$ additionally requires the joint
+rank condition of \cref{thm:general-rank} so that the two score-kernel
+conditions intersect in zero, which is the only place the rank
+condition enters a consistency claim.
+\end{corollary}
+
+\begin{corollary}[Code-frequency consistency, phenotyping]
+\label{cor:phenotype}
+Take regime (A) with the single-code Bernoulli report law and $\T(C) =
+C$. The Bernoulli law depends on $(\pi, \mathrm{sens}, \mathrm{spec})$
+only through the code frequency $q = \pi\,\mathrm{sens} +
+(1-\pi)(1-\mathrm{spec})$, which is the natural mean parameter, and
+\eqref{eq:general-consistency} reads $q(\hat\pi,
+\widehat{\mathrm{sens}}, \widehat{\mathrm{spec}}) = \bar C$, the
+code-frequency consistency theorem of
+\citet{towell2026phenotypecoarsening}. The reduction is exact in the
+informative regime $\mathrm{sens} + \mathrm{spec} > 1$, where the
+gradient of $q$ in the parameters is nonzero, which is the
+full-rank-Jacobian hypothesis of regime (A) specialized to the scalar
+mean. The single-code likelihood depends on the three parameters
+$(\pi, \mathrm{sens}, \mathrm{spec})$ only through the scalar $q$, so
+consistency pins $q$ but not the triple: the $3 \to 1$ collapse is
+exactly why the chart-review singleton of \cref{sec:identifiability} is
+needed to recover the individual parameters.
+\end{corollary}
+
+\begin{corollary}[Agreement consistency, weak supervision]
+\label{cor:weaksup}
+Take regime (A) with a label-model report law that is a regular
+exponential family whose sufficient statistics \emph{include} the
+pairwise agreement indicators $\T_{jk}(\bm\lambda) = \1\{\lambda_j =
+\lambda_k\}$. Then \eqref{eq:general-consistency} reads
+$\widehat{\Prob}\{\lambda_j = \lambda_k \mid \text{both vote}\} =
+\bar A_{jk}$, the agreement consistency theorem of
+\citet{towell2026weaksupcoarsening}. The reduction is exact only under
+this sufficiency hypothesis. The standard naive-Bayes label model of
+data programming \citep{ratner2016data} is parametrized by per-LF
+accuracies and the class prior, for which the pairwise agreement
+indicators are \emph{not} sufficient statistics; for that
+parametrization the identity holds only asymptotically, at the
+population parameter values and at the $n^{-1/2}$ rate, as established
+in \citet{towell2026weaksupcoarsening}. This is the first seam: regime
+(A) delivers agreement consistency exactly for a sufficiency-complete
+parametrization and only in the limit for the parametrization
+practitioners actually use.
+\end{corollary}
+
+\begin{corollary}[Release consistency, differential privacy]
+\label{cor:dp}
+Take regime (B) with the additive-noise release $M = q(D) + Z$, $Z
+\sim \kappa$, and $\T(M) = M$. This is the single-release case, $n = 1$:
+the analyst observes one release $M$ and fits $\theta$ from the marginal
+release density $p_M(m \mid \theta) = p_{\mathrm{conv}}(m -
+\mu(\theta))$. For $p_{\mathrm{conv}}$ symmetric and unimodal its
+log-density in $\theta$ is maximized where $m - \mu(\hat\theta) = 0$, so
+$\mu(\hat\theta) = m$ exactly, with no appeal to differentiability or
+to the kernel scale; because a symmetric unimodal density has mode equal
+to mean, this is the exact first-moment identity $\E_{\hat\theta,\kappa}[M]
+= m_{\mathrm{obs}}$, the release consistency theorem of
+\citet{towell2026dpcoarsening}. The single release is what makes the
+identity exact: it is the $n = 1$ instance of \cref{rem:loc-sketch}, and
+it does not generalize to a sample-mean identity over several releases,
+which would require the Gaussian kernel. This is the second seam: the
+release law is a continuous convolution, not a curved exponential family
+in $\theta$, so release consistency is recovered from the location-family
+branch (B) and its proof uses the location-family score identity, not the
+exponential-family mean-value identity that serves the other four
+corollaries. With this reading the differential-privacy identity is an
+instance of the same stationarity principle, but it is not a corollary
+of regime (A).
+\end{corollary}
+
+\Cref{tab:reduction} maps how far the single principle reaches into
+each domain. A unification whose boundary is located exactly, here is
+where it is an exact finite-sample identity, here a per-coordinate one,
+here an $n = 1$ identity, here an asymptotic one, is stronger and more
+useful than one whose boundary is merely asserted: the map below is the
+demonstrated reach of \cref{thm:general-consistency}, not a list of
+apologies.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}p{0.20\linewidth} p{0.07\linewidth} p{0.07\linewidth} p{0.50\linewidth}@{}}
+\toprule
+\textbf{Named theorem} & \textbf{Regime} & \textbf{Reach} & \textbf{How far the principle reaches} \\
+\midrule
+Cell-total (scRNA) & (A) & $\bullet$ & Exact finite-sample identity. ZINB is a regular exponential family with mean-parameterized score. \\
+Spot-level (spatial) & (A) & $\bullet$ & Exact finite-sample identity per coordinate; the vector form additionally uses the joint rank condition (\cref{thm:general-rank}). \\
+Code-frequency (phenotype) & (A) & $\bullet$ & Exact finite-sample identity in the informative regime $\mathrm{sens} + \mathrm{spec} > 1$ (nonzero mean gradient). \\
+Agreement (weak sup.) & (A) & $\circ$ & Exact finite-sample identity when the agreement indicators are sufficient statistics; asymptotic at the $n^{-1/2}$ rate for the naive-Bayes parametrization. Gold-set restoration of identifiability under labeling-function dependence costs $\Theta(r/\mathrm{gap}^2)$ gold labels for total (L2) model recovery, in the parameter-degeneracy dimension $r$ and accuracy margin. \\
+Release (DP) & (B) & $\triangleright$ & Location-family branch, not regime (A). Exact at the single release ($n = 1$) for any symmetric unimodal kernel; the population first-moment identity. \\
+\bottomrule
+\end{tabular}
+\caption{How far \cref{thm:general-consistency} reaches in each domain.
+Legend: $\bullet$ exact finite-sample identity through the
+exponential-family regime (A); $\circ$ exact under a sufficiency-complete
+parametrization, asymptotic ($n^{-1/2}$) otherwise; $\triangleright$
+recovered through the location-family regime (B), exact at the single
+release and as a population first-moment identity. The boundary is
+located precisely rather than asserted: three domains are exact via
+regime (A), one is exact under the right parametrization and asymptotic
+otherwise, and differential privacy is the single-release identity of
+the location branch.}
+\label{tab:reduction}
+\end{table}

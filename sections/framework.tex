@@ -1,0 +1,145 @@
+\section{The coarsening framework, stated once}
+\label{sec:framework}
+
+We fix an abstract data-generating process that specializes to each
+domain, state the coarsening-at-random conditions on it, and isolate
+the object, the coarsening-sufficient statistic, that the consistency
+theorem is about.
+
+\subsection{Data-generating process}
+
+A latent variable $\Y \in \mathcal{Y}$ is governed by a parameter
+$\theta \in \Theta \subseteq \R^p$ through a density $g(y \mid
+\theta)$. The analyst does not observe $\Y$. A coarsening mechanism
+produces an observed report $R \in \mathcal{R}$, distributed as
+$\kappa(r \mid y)$ conditional on the latent value. The observed
+datum, possibly with covariates suppressed, is $R$; the analyst sees
+$n$ independent reports $R_1, \ldots, R_n$ and wants $\theta$. The
+\emph{candidate set} of a report is
+\begin{equation}
+  c(r) = \{ y \in \mathcal{Y} : \kappa(r \mid y) > 0 \},
+  \label{eq:fw-candidate}
+\end{equation}
+the latent values the report does not exclude. In the discrete
+reliability setting $c(r)$ is a finite set of components; in the
+continuous additive-noise setting of differential privacy it is a
+kernel-weighted continuum, the latent values $y$ reweighted by
+$\kappa(r \mid y)$. The two are the same object at different
+cardinalities, and we carry the weighted form throughout: the report
+contributes the weight function $y \mapsto \kappa(r \mid y)$ to the
+likelihood, and $c(r)$ is its support.
+
+\subsection{The coarsening-at-random conditions}
+
+The three conditions of \citet{towell2026masked} transcribe to the
+abstract process directly. They are the masked-data specialization of
+coarsening at random
+\citep{heitjan1991ignorability,gill1997coarsening}.
+
+\begin{condition}[C1: the candidate set contains the truth]
+\label{cond:c1}
+The report never excludes the latent value: $\Prob_\theta\{\Y \in
+c(R)\} = 1$.
+\end{condition}
+
+\begin{condition}[C2: symmetric coarsening within the candidate set]
+\label{cond:c2}
+Conditional on the report $R = r$, the coarsening probability does not
+depend on which admissible latent value is the true one: for all $y,
+y' \in c(r)$,
+\begin{equation}
+  \kappa(r \mid y) = \kappa(r \mid y').
+  \label{eq:fw-c2}
+\end{equation}
+A singleton candidate set, $|c(r)| = 1$, satisfies C2 vacuously.
+\end{condition}
+
+\begin{condition}[C3: coarsening independent of $\theta$]
+\label{cond:c3}
+The coarsening probability $\kappa(r \mid y)$, viewed for $y \in
+c(r)$, does not depend on $\theta$.
+\end{condition}
+
+Under C1, the likelihood sum (or integral) over latent values
+collapses to the candidate set. Under C2, the common coarsening weight
+factors out of that sum. Under C3, the factored weight is a constant
+in $\theta$ and drops from the optimization. The result is the
+face-value likelihood: the analyst maximizes
+\begin{equation}
+  L(\theta) \;\propto\; \prod_{i=1}^n \int_{c(R_i)} g(y \mid \theta)
+    \, d\nu(y),
+  \label{eq:fw-likelihood}
+\end{equation}
+with $\nu$ the base measure on $\mathcal{Y}$ (counting in the discrete
+case, Lebesgue in the continuous case), and the coarsening mechanism
+itself is never modeled. This is exactly the C1--C2--C3 likelihood of
+\citet[Theorem on the C1--C2--C3 likelihood]{towell2026masked}
+specialized to a single coarse report per unit; the reliability paper
+carries the additional censoring structure that we suppress here. The
+ignorability that licenses \eqref{eq:fw-likelihood} is the standard
+consequence of coarsening at random
+\citep[Ch.~6]{little2002statistical}.
+
+\subsection{The coarsening-sufficient statistic}
+\label{sec:css}
+
+The consistency theorem is not about $\theta$ directly; it is about a
+statistic of the report that the coarsening preserves. Write the
+face-value model in terms of a map from the latent law to the report
+law. Define the \emph{coarsening-sufficient statistic} $\T :
+\mathcal{R} \to \R^d$ as a statistic of the observed report whose
+expectation under the fitted model is a smooth function of $\theta$
+through the coarsened marginal, and which the model-implied mean
+\begin{equation}
+  m(\theta) \;=\; \E_\theta[\T(R)]
+  \label{eq:fw-implied-mean}
+\end{equation}
+constrains the fit to reproduce. In a regular exponential family $\T$
+is the family's sufficient statistic, and the face-value log-likelihood
+\eqref{eq:fw-likelihood} then depends on the data only through the
+empirical mean $\bar\T = n^{-1}\sum_i \T(R_i)$, so the fit reproduces
+$\bar\T$ exactly (regime (A) of \cref{sec:consistency}). In a location
+family $\T(R) = R$, and the likelihood depends on the full sample
+through the score $\sum_i \psi(R_i - \mu)$ rather than through $\bar\T$
+alone; the fit reproduces the sample $\psi$-location exactly and $\bar\T$
+exactly only for a single report or for the Gaussian kernel, with an
+$O_p(n^{-1/2})$ remainder otherwise (regime (B)). The
+\citet{towell2026dpcoarsening} first-moment identity is the population
+form of the location-family case.
+
+The point of the synthesis is that each domain names a different $\T$,
+and the consistency identity in each domain is the single equation
+$m(\hat\theta) = \bar\T$ read in that domain's coordinates.
+\Cref{tab:css} lists the instantiations.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}p{0.20\linewidth} p{0.30\linewidth} p{0.42\linewidth}@{}}
+\toprule
+\textbf{Domain} & \textbf{Coarsening-sufficient statistic $\T$} &
+  \textbf{Implied mean $m(\theta)$} \\
+\midrule
+scRNA-seq \citep{towell2026scrnacoarsening} &
+  Observed count $X$ per gene &
+  $(1-\pi_j)\mu_j$ (ZINB observed mean) \\
+Spatial \citep{towell2026spatialcoarsening} &
+  Observed count $X_{sj}$ per spot/gene &
+  $\sum_k P_{sk}\mu_{j,k}$ (mixture spot mean) \\
+Differential privacy \citep{towell2026dpcoarsening} &
+  The release $M = R$ itself &
+  $\E_{\theta,\kappa}[M]$ (convolution mean) \\
+Weak supervision \citep{towell2026weaksupcoarsening} &
+  Pairwise agreement indicator $\1\{\lambda_j = \lambda_k\}$ &
+  $\Prob_\theta\{\lambda_j = \lambda_k\}$ (model agreement rate) \\
+Phenotyping \citep{towell2026phenotypecoarsening} &
+  Code indicator $C$ &
+  $\pi\,\mathrm{sens} + (1-\pi)(1-\mathrm{spec})$ (code frequency) \\
+\bottomrule
+\end{tabular}
+\caption{The coarsening-sufficient statistic $\T$ and the
+model-implied mean $m(\theta) = \E_\theta[\T]$ in each domain. The
+consistency theorem of \cref{sec:consistency} is the single identity
+$m(\hat\theta) = \bar\T$, read in each row's coordinates.}
+\label{tab:css}
+\end{table}

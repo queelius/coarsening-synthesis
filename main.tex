@@ -1,0 +1,149 @@
+%% One consistency theorem for coarsened-data MLEs:
+%% a synthesis of the coarsening-at-random framework across domains.
+%% Methods/synthesis-format draft (target venue: Statistical Science).
+%%
+%% Formatted with the IMS imsart document class (sts option) for
+%% submission to Statistical Science / Statistics Surveys.
+%% Class files imsart.cls, imsart.sty, imsart-nameyear.bst, and
+%% imsart-number.bst are bundled in the repo root so the build is
+%% self-contained; they are the official IMS LaTeX support package
+%% from https://github.com/vtex-soft/texsupport.ims-sts .
+
+\documentclass[sts]{imsart}
+
+%% ============================================================================
+%% Packages
+%% ============================================================================
+%% imsart loads article + amsmath (with leqno) + natbib + hyperref internally;
+%% we follow the official STS template by re-requiring the math packages and
+%% selecting author-year natbib so imsart-nameyear.bst renders correctly.
+
+\RequirePackage{amsthm,amsmath,amsfonts,amssymb}
+\RequirePackage[authoryear]{natbib}
+\RequirePackage[colorlinks,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
+\RequirePackage{graphicx}
+\graphicspath{{figures/}}
+
+\RequirePackage{mathtools}
+\RequirePackage{bm}
+\RequirePackage{booktabs}
+\RequirePackage[shortlabels]{enumitem}
+\RequirePackage{microtype}
+%% cleveref must load after hyperref.
+\RequirePackage{cleveref}
+
+%% ============================================================================
+%% Local definitions: theorem environments and custom macros.
+%% imsart requires custom macros and \newtheorem declarations to live inside
+%% the \startlocaldefs ... \endlocaldefs block.
+%% ============================================================================
+\startlocaldefs
+
+%% Theorem environments. Same scheme as the sibling papers: the headline
+%% theorems get one shared counter, while propositions, lemmas,
+%% corollaries, definitions, conditions, and remarks get independent
+%% counters so the structural results read cleanly.
+%% Note: imsart forbids \theoremstyle{remark}; remarks use the
+%% definition style here, which imsart provides.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{condition}{Condition}
+\crefname{condition}{Condition}{Conditions}
+\Crefname{condition}{Condition}{Conditions}
+
+\newtheorem{remark}{Remark}
+
+%% Macros
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\X}{X}
+\newcommand{\Y}{Y}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\T}{T}
+
+\endlocaldefs
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{One consistency theorem for coarsened-data maximum likelihood:
+       a cross-domain synthesis of the coarsening-at-random framework}
+\runtitle{A consistency theorem for coarsened-data MLE}
+
+\begin{aug}
+\author[A]{\fnms{Alexander}~\snm{Towell}\ead[label=e1]{lex@metafunctor.com}\orcid{0000-0001-6443-9897}}
+\runauthor{A. Towell}
+
+\address[A]{Department of Computer Science,
+Southern Illinois University Edwardsville,
+Edwardsville, Illinois, USA\printead[presep={\ }]{e1}.}
+\end{aug}
+
+\begin{abstract}
+A recurring statistical structure appears, under different names,
+across reliability, single-cell and spatial genomics, differential
+privacy, programmatic weak supervision, and electronic-health-record
+phenotyping. In each, a latent quantity is observed only through a
+coarsening: a candidate set, a dropout, a noised release, a vote, a
+diagnostic code. Two results recur. The first is seam-free across all
+six domains: an augmented-candidate-set rank condition decides when the
+latent parameter is identifiable, and a singleton candidate set, a
+report that pins the latent quantity to a point, restores
+identifiability by restoring column rank. The singleton wears a
+different costume in each field (spike-ins, single-cell-resolution
+probes, gold labels, non-private releases, chart review) but is one
+mechanism, and we state it once. The second recurring result is a
+consistency identity at the maximum-likelihood fit. When the coarsening
+satisfies the coarsening-at-random conditions C1, C2, C3, the
+face-value likelihood can be maximized without modeling the coarsening,
+and the fit reproduces the empirical mean of a coarsening-sufficient
+statistic at the optimum. This identity has been stated five separate
+times, as cell-total consistency in single-cell data, its spot-level
+variant in spatial deconvolution, release consistency for differential
+privacy, agreement consistency for weak supervision, and code-frequency
+consistency for phenotyping; we state it once and recover each named
+version as a special case. Its boundary is the more nuanced part of the
+synthesis, and we locate it exactly. In a regular exponential family
+the identity is an exact finite-sample equality; in a location family
+it is exact for a single report and a population first-moment identity
+otherwise, with the finite-sample sample-mean form holding only up to
+an $n^{-1/2}$ remainder and exactly only for the Gaussian kernel, which
+itself sits in the exponential-family regime. The weak-supervision case
+reduces exactly under a sufficiency-complete parametrization and
+asymptotically otherwise, and differential privacy is recovered through
+the location-family branch as a single-release identity. The empirical
+weight is carried by the sibling papers, which are cited rather than
+re-derived.
+\end{abstract}
+
+\begin{keyword}
+\kwd{coarsening at random}
+\kwd{masked-data inference}
+\kwd{identifiability}
+\kwd{maximum likelihood}
+\kwd{consistency}
+\end{keyword}
+
+\end{frontmatter}
+
+\input{sections/introduction}
+\input{sections/framework}
+\input{sections/consistency}
+\input{sections/identifiability}
+\input{sections/applications}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\bibliographystyle{imsart-nameyear}
+\bibliography{refs}
+
+\end{document}

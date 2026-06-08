@@ -1,0 +1,158 @@
+\section{Identifiability and the singleton device}
+\label{sec:identifiability}
+
+The second result the siblings share is structural identifiability:
+when do the coarsened reports determine $\theta$, and what restores
+identifiability when they do not. We state the rank condition once and
+the singleton-restoration result once, then tabulate the per-domain
+singleton devices as instances of one mechanism.
+
+\subsection{The augmented-candidate-set rank condition}
+
+Let $\mathcal{S}$ be the collection of candidate sets that occur with
+positive probability under the coarsening, and let $C \in
+\{0,1\}^{|\mathcal{S}| \times m}$ be the candidate-set matrix whose
+rows are the indicator vectors of the sets in $\mathcal{S}$ over an
+$m$-element latent support. Write $\tilde C$ for $C$ augmented with the
+all-ones row, the row contributed by the fully uninformative report.
+
+\begin{theorem}[Identifiability under C1--C2--C3]
+\label{thm:general-rank}
+Suppose each latent component's contribution to the report law is
+individually identifiable, and C1--C2--C3 (\cref{cond:c1,cond:c2,cond:c3})
+hold. Then:
+\begin{enumerate}[(a)]
+\item \textbf{Necessity.} If two latent components are
+  \emph{coarsening-confounded}, that is, every candidate set in
+  $\mathcal{S}$ contains both or neither, their parameters are not
+  separately identifiable from the coarsened-data likelihood: any
+  reparametrization preserving their summed contribution leaves the
+  likelihood unchanged.
+\item \textbf{Sufficiency.} If $\tilde C$ has full column rank $m$, then
+  $\theta$ is identifiable.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}[Instantiating the rank condition]
+\label{rem:rank-instantiation}
+The sufficiency hypothesis is the column-rank condition on $\tilde C$
+alone; each domain then supplies whatever support condition makes its
+own coarsening map produce a full-rank incidence. In the time-to-event
+instance this is the requirement that the mechanism assign positive
+probability to both exact and censored reports, so that the all-ones
+augmenting row is realized; the continuous-report instances replace it
+with the analogous support condition on the operator
+(\cref{thm:general-rank}, proof sketch). These are instantiation
+details of one rank condition, not separate hypotheses of the general
+theorem.
+\end{remark}
+
+\begin{proof}[Sketch]
+This is Theorem on identifiability under C1--C2--C3 of
+\citet{towell2026masked}, restated for the abstract process. The
+necessity direction is the observation that under C1--C2--C3 the
+likelihood depends on a confounded pair only through the sum of their
+contributions, so the sum is identifiable but the split is not. The
+sufficiency direction differences the report law across candidate sets
+to obtain $\tilde C\, g(\cdot) = 0$ for the vector $g$ of pairwise
+contribution differences, whence full column rank of $\tilde C$ forces
+$g = 0$ and individual identifiability closes the argument. The
+continuous-report instances replace the finite incidence matrix
+$\tilde C$ with its operator analogue: in spatial transcriptomics it
+is the spot-by-cell-type composition matrix $P$, identifiable exactly
+when $P$ has full column rank
+\citep{towell2026spatialcoarsening}; in differential privacy with a
+linear query $q(D) = AD$ it is the design matrix $A$, identifiable
+exactly when $A$ has full column rank \citep{towell2026dpcoarsening};
+in weak supervision it is the agreement matrix whose off-diagonal is
+rank one under conditional independence, with a rank deficit $r$
+induced by labeling-function dependence
+\citep{towell2026weaksupcoarsening}. Each is the same rank condition
+on the augmented coarsening operator. The autopsy-model ancestry of
+the finite case is \citet{meilijson1981}; the competing-risks
+nonidentifiability without independence is \citet{tsiatis1975}.
+\end{proof}
+
+\subsection{Singletons restore identifiability}
+
+When the rank condition fails, every domain reaches for the same
+remedy: a report that pins the latent value to a point.
+
+\begin{proposition}[Singleton restoration]
+\label{prop:singleton}
+A report $r$ with $|c(r)| = 1$, a \emph{singleton} candidate set,
+contributes the latent value exactly. Augmenting the candidate-set
+collection $\mathcal{S}$ with singletons for components on which
+$\tilde C$ is rank-deficient raises the column rank of $\tilde C$; a
+collection of singletons that covers a basis of the deficient subspace
+restores full column rank and hence identifiability under
+\cref{thm:general-rank}. A singleton satisfies C2 vacuously, so it adds
+information without adding a modeling burden.
+\end{proposition}
+
+\begin{proof}[Sketch]
+A singleton $\{j\}$ adds the standard basis row $e_j^\top$ to $C$.
+Adding rows can only raise rank, and a set of singletons spanning the
+left-null directions of $\tilde C$ removes the rank deficit, at which
+point \cref{thm:general-rank}(b) applies. The C2-vacuousness of
+singletons is \cref{cond:c2} at $|c(r)| = 1$. The quantitative version,
+how many singletons are needed, is domain-specific: in weak
+supervision it is set by the rank deficit $r$ and the labeling-function
+accuracy margin \citep{towell2026weaksupcoarsening}; in the others a
+basis-covering set suffices.
+\end{proof}
+
+The content of \cref{prop:singleton} is that the recovery devices the
+five fields invented independently are one device. \Cref{tab:singletons}
+makes the identification explicit.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}p{0.20\linewidth} p{0.34\linewidth} p{0.38\linewidth}@{}}
+\toprule
+\textbf{Domain} & \textbf{Singleton device} & \textbf{What it pins} \\
+\midrule
+Reliability \citep{towell2026masked} &
+  A diagnostic that resolves the failed component &
+  The exact cause $K_i$ \\
+scRNA-seq \citep{towell2026scrnacoarsening} &
+  ERCC spike-in transcript (known input) &
+  The dropout function, hence the per-gene mean \\
+Spatial \citep{towell2026spatialcoarsening} &
+  Single-cell-resolution probe / spot &
+  The cell-type-specific expression at that location \\
+Differential privacy \citep{towell2026dpcoarsening} &
+  A non-private (noise-free) release &
+  The kernel scale, hence the functional $\theta$ \\
+Weak supervision \citep{towell2026weaksupcoarsening} &
+  A gold-labeled example &
+  The true label $Y_i$ \\
+Phenotyping \citep{towell2026phenotypecoarsening} &
+  A chart-reviewed (adjudicated) patient &
+  The true disease state, hence sens/spec \\
+\bottomrule
+\end{tabular}
+\caption{The singleton candidate set in each domain. These are not
+analogies: each is a report $r$ with $|c(r)| = 1$ in the sense of
+\eqref{eq:fw-candidate}, and each restores identifiability by the same
+rank argument (\cref{prop:singleton}).}
+\label{tab:singletons}
+\end{table}
+
+\subsection{When C2 fails}
+
+The conditions are not always met, and the framework says what breaks.
+When C2 fails, the coarsening weight no longer factors out, the score
+acquires an unmodeled $\theta$-dependent term, and the affected
+functionals lose identifiability from coarsened reports alone. This is
+the same failure in every domain: informative masking in reliability
+\citep{towell2026mdrelax}, data-dependent mechanisms (sparse vector,
+propose-test-release) in differential privacy
+\citep{towell2026dpcoarsening}, labeling-function dependence in weak
+supervision \citep{towell2026weaksupcoarsening}, and verification bias
+on a non-random chart-reviewed subsample in phenotyping
+\citep{towell2026phenotypecoarsening}. The remedy is again the
+singleton of \cref{prop:singleton}, plus, where available, the
+sensitivity bands of \citet{towell2026mdrelax} that quantify how far
+estimates can move under a bounded C2 violation.
