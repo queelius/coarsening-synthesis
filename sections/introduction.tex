@@ -129,15 +129,18 @@ hides them would misrepresent what is shared.
 
 One objection deserves a direct answer, because a reader will raise it
 at once: in its exponential-family regime the consistency identity is
-the textbook score equation $\sum_i \T(R_i) = n\,\E[\T]$ at the MLE, so
-is the contribution merely that several papers reused an elementary
+the score equation $\sum_i \T(R_i) = n\,\E[\T]$ at the MLE, a fact known
+for coarsened and hidden-data exponential families \citep{domke2020moment},
+so is the contribution merely that several papers reused an elementary
 fact? It is not, for three reasons. First, the content of the identity
 here is not the moment-matching itself but what the coarsening does to
 it: the coarsening makes the \emph{observed} marginal an exponential
 family while the estimation bias lives in the \emph{latent} parameter,
 so the identity is a statement about what a fitted latent model
 structurally cannot detect, not a computation. That is the diagnostic
-moral every sibling issues, and it is the opposite of a triviality.
+moral every sibling issues, the coarsened-data instance of the equal-fit
+phenomenon of \citet{molenberghs2008every}, and it is the opposite of a
+triviality.
 Second, the singleton-and-rank half of the paper is not elementary
 moment-matching at all: the augmented-candidate-set rank condition and
 the singleton-restoration result are a genuine identifiability device,

@@ -137,7 +137,13 @@ $2$, an exact gap of $-1$, and the logistic MLE sits at a strict,
 smooth interior maximum a fixed distance from the mean, ruling out any
 appeal to a kink in $\psi$. For $n \ge 3$ and a non-Gaussian kernel
 the residual $\mu(\hat\theta) - \bar R$ is genuinely nonzero and of
-order $n^{-1/2}$ (proof of the theorem), and the population first-moment
+order $n^{-1/2}$ (proof of the theorem), with limiting standard deviation
+$\sqrt{V/n}$ for $V = \operatorname{Var}(\psi(Z)/J - Z)$: this constant is
+$V = 1$ for the Laplace kernel (influence function $\operatorname{sign}(Z) - Z$),
+$V \approx 0.290$ ($\sqrt{V} \approx 0.538$) for the logistic, and $V = 0$ for the
+Gaussian, where the identity is exact and the branch collapses into regime (A); a
+Monte Carlo check at large $n$ reproduces both the constants and the $n^{-1/2}$
+slope. The population first-moment
 identity $\E_{\hat\theta,\kappa}[M] = m_{\mathrm{obs}}$ of
 \citet{towell2026dpcoarsening} is its $n = 1$ and limiting form.
 Log-concavity (not mere unimodality) of $p_0$ is what makes $\hat\mu$ a

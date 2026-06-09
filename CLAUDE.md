@@ -50,8 +50,9 @@ simulation. LaTeX with `natbib` and `cleveref` only.
   `consistency.tex`): at an interior MLE the fitted mean of the
   coarsening-sufficient statistic equals its empirical mean. Two
   regimes: (A) regular exponential family (complete proof via
-  log-partition gradient), (B) location family (proof with one open
-  step; exact for the Gaussian kernel).
+  log-partition gradient), (B) location family (settled: sample-mean
+  identity exact iff Gaussian; otherwise the psi-location is the exact
+  finite-sample identity and the sample-mean form is asymptotic, V tabulated).
 - **Five named corollaries** (`cor:scrna`, `cor:spatial`,
   `cor:phenotype`, `cor:weaksup`, `cor:dp`, `consistency.tex`).
 - **General rank condition** (`thm:general-rank`, `identifiability.tex`):
@@ -70,9 +71,14 @@ this honesty in any revision:
    consistency is a continuous-convolution first-moment identity proved
    through the location-family score, NOT the exponential-family
    mean-value identity that serves the other four. It is exact only for
-   the Gaussian kernel; the kernel-general finite-sample version is the
-   one genuinely OPEN step in the general proof. Do not claim a complete
-   general proof of regime (B). (The dp paper itself replaced an
+   the Gaussian kernel; the sample-mean form holds if and only if the
+   kernel is Gaussian (SETTLED: stationarity at the mean for all samples is
+   Cauchy's equation, forcing a Gaussian kernel). For a general symmetric
+   log-concave kernel the exact finite-sample identity is the sample
+   psi-location, and the sample-mean form is the n=1 / population /
+   asymptotic (O_p(n^{-1/2}), constant V tabulated in rem:loc-sketch)
+   statement. Do not claim a general-n sample-mean identity for non-Gaussian
+   kernels (it is false). (The dp paper itself replaced an
    incorrect "regular-exponential-family" route with the location-family
    route during its own review; this is why dp does not sit in regime A.)
 2. **Weak supervision reduces exactly only under a sufficiency-complete
@@ -118,6 +124,7 @@ venue.
 ## Status
 
 Scaffold v0.1 (June 2026). All seven sections substantive. Regime (A)
-proof complete; regime (B) proof has one labeled open step; rank and
+proof complete; regime (B) settled (Gaussian-iff sample-mean identity;
+psi-location exact; V tabulated); rank and
 singleton results are sketches citing `towell2026masked`. Build verified
 clean (13 pages, 0 undefined).

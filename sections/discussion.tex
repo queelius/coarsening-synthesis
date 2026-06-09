@@ -89,12 +89,13 @@ the common structure.
   and a real-data validation remains to be done
   \citep{towell2026phenotypecoarsening}.
 \item \textbf{Differential privacy, finite-sample multi-release
-  corrections.} The single-release identity is exact and the
-  Gaussian-iff characterization of the sample-mean form is settled
-  (\cref{rem:loc-sketch}); what remains optional, not open, is
-  tabulating the leading constant $V = \operatorname{Var}(\psi(Z)/J - Z)$
-  of the $O_p(n^{-1/2})$ remainder for the standard release kernels if a
-  finite-sample correction over several releases is wanted.
+  corrections.} The single-release identity is exact, the Gaussian-iff
+  characterization of the sample-mean form is settled, and the leading
+  constant $V = \operatorname{Var}(\psi(Z)/J - Z)$ of the $O_p(n^{-1/2})$
+  remainder is now tabulated for the standard kernels ($V = 1$ Laplace,
+  $\approx 0.290$ logistic, $0$ Gaussian) in \cref{rem:loc-sketch}, so a
+  finite-sample multi-release correction is immediate; nothing remains open
+  here.
 \item \textbf{C2 violations, quantitatively.} The sensitivity bands of
   \citet{towell2026mdrelax} are worked out for reliability; porting the
   bounded-C2-violation analysis to the other domains is open and would
@@ -119,6 +120,26 @@ across seven concrete fields as instances of those conditions, and the
 explicit reduction of the six named theorems to a single statement
 with a clean account of the two regimes and the two seams. The
 exponential-family mean-value identity that powers regime (A) is itself
-textbook \citep{vandervaart1998asymptotic}; the contribution is to
-recognize that the six named theorems are that identity wearing six
-costumes.
+textbook \citep{vandervaart1998asymptotic}, extended to coarsened and
+hidden-data exponential families by \citet{domke2020moment}; the
+contribution is to recognize that the six named theorems are that identity
+wearing six costumes.
+
+Three results unify parts of this picture more abstractly, and locating the
+contribution against them sharpens it rather than weakening it.
+\citet{domke2020moment} gives the moment-matching identity for hidden and
+conditioned exponential families, which is exactly the regime-(A) identity;
+the additions here are the location-family regime (B) with its Gaussian-only
+boundary and the cross-domain reduction. \citet{molenberghs2008every} prove
+that every missingness-not-at-random fit has a missing-at-random counterpart
+with identical observed-data fit; that is the general form of the diagnostic
+moral that marginal fit is not unbiasedness, and the addition here is the
+mechanical mean-matching identity together with the constructive
+singleton-and-rank cure the equal-fit literature does not supply.
+\citet{fotakis2021efficient}, with a 2026 follow-up
+(\texttt{arXiv:2602.23341}) that characterizes when a coarse-label partition
+is information-preserving, gives the abstract coarse-data learnability and
+identifiability counterpart; the synthesis recasts identifiability as a
+candidate-set rank condition with a single singleton-restoration device
+across six applied domains, of which their continuous condition is the
+general statistical-learning form.
