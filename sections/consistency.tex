@@ -109,6 +109,21 @@ the $n = 1$ case and the $n \to \infty$ limit of this statement; see
 \cref{rem:loc-sketch}.
 \end{proof}
 
+\begin{remark}[Regression form of regime (A)]
+\label{rem:glm}
+The proof is written for reports from a single exponential family with a
+common natural parameter. It extends verbatim to independent, non-identically
+distributed reports with a unit-indexed natural parameter $\eta_i(\theta)$, a
+generalized linear model: the gradient becomes $\sum_i
+(\partial\eta_i/\partial\theta)^\top(\T(R_i) - m_i(\hat\theta)) = \bm 0$, the
+aggregate score identity, and full column rank of the stacked Jacobian
+$\partial\eta/\partial\theta$ plays the role of the rank hypothesis. The
+spot-level (\cref{cor:spatial}) and bag-prevalence (\cref{cor:mil}) corollaries
+are this regression form, where the exact statement is the weighted moment match
+$(\partial\eta/\partial\theta)^\top(\bm Y - \hat{\bm p}) = \bm 0$ rather than a
+coordinatewise $m(\hat\theta) = \bar\T$.
+\end{remark}
+
 \begin{remark}[The boundary of the location-family branch, characterized]
 \label{rem:loc-sketch}
 Regime (A) is an exact finite-sample identity: the exponential-family
@@ -138,7 +153,8 @@ smooth interior maximum a fixed distance from the mean, ruling out any
 appeal to a kink in $\psi$. For $n \ge 3$ and a non-Gaussian kernel
 the residual $\mu(\hat\theta) - \bar R$ is genuinely nonzero and of
 order $n^{-1/2}$ (proof of the theorem), with limiting standard deviation
-$\sqrt{V/n}$ for $V = \operatorname{Var}(\psi(Z)/J - Z)$: this constant is
+$\sqrt{V/n}$ for $V = \operatorname{Var}(\psi(Z)/J - Z)$: this constant, with
+each kernel taken at unit scale parameter, is
 $V = 1$ for the Laplace kernel (influence function $\operatorname{sign}(Z) - Z$),
 $V \approx 0.290$ ($\sqrt{V} \approx 0.538$) for the logistic, and $V = 0$ for the
 Gaussian, where the identity is exact and the branch collapses into regime (A); a
@@ -175,19 +191,22 @@ Take regime (A) with the zero-inflated negative-binomial report law
 for gene $j$ and $\T(X) = X$. Then $m(\hat\theta) = (1 -
 \hat\pi_j)\hat\mu_j$ and \eqref{eq:general-consistency} reads $(1 -
 \hat\pi_j)\hat\mu_j = \bar X_j$. This is the cell-total consistency
-theorem of \citet{towell2026scrnacoarsening}. The reduction is exact:
-the ZINB observed-count law is a regular exponential family with the
-mean-parameterized score $\partial_\mu \log g(x; \mu, \phi) = (x -
-\mu)/[\mu(1+\mu\phi)]$, which is the regime-(A) hypothesis.
+theorem of \citet{towell2026scrnacoarsening}. The reduction is exact: with the dispersion $\phi$ known, the ZINB
+observed-count law is a regular exponential family whose natural
+sufficient statistic is the pair $(X, \1\{X = 0\})$, the
+negative-binomial base reweighted only at the zero cell, so the
+regime-(A) mean-matching holds in both coordinates and cell-total
+consistency is its $X$-coordinate. The $X$-moment continues to match
+$\bar X_j$ even when $\phi$ is estimated jointly.
 \end{corollary}
 
 \begin{corollary}[Spot-level consistency, spatial transcriptomics]
 \label{cor:spatial}
-Take regime (A) with the spot-level Poisson report law of mean $N_s
-\sum_k p_{s,k}\mu_{j,k}$ and $\T(X_{sj}) = X_{sj}$, both $\bm\mu_j$ and
+Take regime (A) with the spot-level Poisson report law of mean $\sum_k
+p_{s,k}\mu_{j,k}$ and $\T(X_{sj}) = X_{sj}$, both $\bm\mu_j$ and
 $\bm p_s$ unconstrained at the optimum. Then
 \eqref{eq:general-consistency} reads $\sum_k \hat P_{sk}\hat\mu_{j,k} =
-\bar X_{sj}$, the cell-total consistency theorem of
+\bar X_{sj}$, the spot-level consistency theorem of
 \citet{towell2026spatialcoarsening}. The Poisson law is a regular
 exponential family, so the per-coordinate identity is exact; the
 \emph{vector} statement over $(s,j)$ additionally requires the joint
