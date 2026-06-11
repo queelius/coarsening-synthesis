@@ -8,9 +8,21 @@ authors:
     orcid: "0000-0001-6443-9897"
     affiliation: "Department of Computer Science, Southern Illinois University Edwardsville"
 paper_type: theory-synthesis
-stage: scaffold-v0.1
+stage: submitted (Statistical Science, 2026-06-11)
 created: 2026-06-03
-last_updated: 2026-06-03
+last_updated: 2026-06-11
+
+submission:
+  venue: "Statistical Science"
+  manuscript_id: "STS2606-004"
+  status: under-review
+  submitted: 2026-06-11
+  round: null      # awaiting editor assignment (initial processing)
+  decision: null
+  track_url: "https://www.e-publications.org/ims/submission/STS/author/track"
+  ejms_article_id: 77074
+  preprint: "v0.3.0, Zenodo concept DOI 10.5281/zenodo.20533912 (version 10.5281/zenodo.20633365)"
+  uploaded: "main.pdf (v0.3.0 build, 12pp, [sts] imsart); metadata, keywords, MSC2020 (in cover comments), abstract entered; no supplementary files; source held for production at acceptance"
 
 structure:
   format: LaTeX-methods-synthesis
